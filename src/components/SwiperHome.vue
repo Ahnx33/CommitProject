@@ -85,7 +85,7 @@ export default {
     },
     methods: {
         navigateToDetail(screenplay) {
-            this.$router.push({ screenPlayId: screenplay.id, mediatype: screenplay?.title ? 'movie' : 'tv' });
+            this.$router.push({ name: 'screenplay.show', params: { screenPlayId: screenplay.id, mediatype: screenplay?.title ? 'movie' : 'tv' } });
         }
     }
 }
