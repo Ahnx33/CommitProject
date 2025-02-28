@@ -75,20 +75,25 @@ const fetchMoreData = async (url, page, array) => {
     array.push(...unique);
 };
 
+let initialized = false
+
 const init = async () => {
-    state.filmsCatalog = await preLoadPages(`${baseURL}/trending/movie/week`, state.LoadedFilms);
-    state.tvSeriesCatalog = await preLoadPages(`${baseURL}/trending/tv/week`, state.LoadedTvs);
-    state.filmGenresList = (await fetchData(`${baseURL}/genre/movie/list`, {
-        language: getLangUrl()
-    }))?.genres || [];
-    state.tvGenresList = (await fetchData(`${baseURL}/genre/tv/list`, {
-        language: getLangUrl()
-    }))?.genres || [];
-    state.initialScreenplays = [state.filmsCatalog, state.tvSeriesCatalog]
-    console.log('Initial');
-    console.log(state.initialScreenplays);
-    console.log('Genres');
-    console.log(state.filmGenresList, state.tvGenresList);
+    if (!initialized) {
+        initialized = true
+        state.filmsCatalog = await preLoadPages(`${baseURL}/trending/movie/week`, state.LoadedFilms);
+        state.tvSeriesCatalog = await preLoadPages(`${baseURL}/trending/tv/week`, state.LoadedTvs);
+        state.filmGenresList = (await fetchData(`${baseURL}/genre/movie/list`, {
+            language: getLangUrl()
+        }))?.genres || [];
+        state.tvGenresList = (await fetchData(`${baseURL}/genre/tv/list`, {
+            language: getLangUrl()
+        }))?.genres || [];
+        state.initialScreenplays = [state.filmsCatalog, state.tvSeriesCatalog]
+        console.log('Initial');
+        console.log(state.initialScreenplays);
+        console.log('Genres');
+        console.log(state.filmGenresList, state.tvGenresList);
+    }
 };
 
 const getListOfType = (type) => {

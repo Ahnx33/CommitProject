@@ -156,7 +156,7 @@ export default {
                         this.isFetching = false;
                     }
                 }
-            }, { threshold: 0.5 });
+            }, { threshold: 0.1 });
 
             this.observer.observe(loadMoreTrigger);
         },

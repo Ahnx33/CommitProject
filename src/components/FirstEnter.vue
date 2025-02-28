@@ -59,19 +59,6 @@ const trending = list => {
     height: 90%;
 }
 
-#content::before {
-    content: "";
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: calc(100vw / 1.778);
-    background: url('/public/images/home.jpeg') no-repeat center center;
-    background-size: cover;
-    opacity: 0.6;
-    z-index: -1;
-}
-
 #swipers {
     width: 100%;
     height: 90%;
@@ -88,8 +75,8 @@ const trending = list => {
 }
 
 .circle {
-    width: 200px;
-    height: 200px;
+    width: 15vw;
+    height: 15vw;
     border-radius: 50%;
     border: 5px solid #1E88E5;
     background-color: black;
