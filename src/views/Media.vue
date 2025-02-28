@@ -43,9 +43,10 @@
 
         <!-- Cards Section -->
         <div class="cards row mt-4 p-4">
-            <div class="col-12 col-sm-6 col-lg-4" v-for="screenplay in filteredScreenplays" :key="screenplay.id">
+            <div class="col-12 col-md-6 col-lg-4 col-xl-3" v-for="screenplay in filteredScreenplays"
+                :key="screenplay.id">
                 <AppLink
-                    :to="{ name: 'screenplay.show', params: { screenPlayId: screenplay.id, mediatype: screenplay?.title ? 'movie' : 'tv' } }">
+                    :to="{ name: 'screenplay.show', params: { screenPlayId: screenplay.id, mediatype: screenplay?.title ? 'movie' : 'tv' }, hash: searchQuery.length > 2 ? `#${searchQuery}` : '' }">
                     <ScreenplayCard :screenplay="screenplay"></ScreenplayCard>
                 </AppLink>
             </div>
@@ -134,6 +135,14 @@ export default {
             return { name: 'media.show', params: { id: this.$route.params.id, genre: this.$route.params.genre, mediatype } };
         },
 
+        debounce(func, delay) {
+            let timer;
+            return function (...args) {
+                clearTimeout(timer);
+                timer = setTimeout(() => func.apply(this, args), delay);
+            };
+        },
+
         setupObserver() {
             if (data.hasReachedMaxPages(this.mediatype)) {
                 this.loading = false;
@@ -143,20 +152,23 @@ export default {
             const loadMoreTrigger = document.getElementById('loadMoreTrigger');
             if (!loadMoreTrigger) return;
 
-            this.observer = new IntersectionObserver(async entries => {
-                if (entries[0].isIntersecting && !this.isFetching) {
-                    this.isFetching = true;
-                    try {
-                        if (this.searchQuery.length > 2) {
-                            await this.loadMoreResults();
-                        } else {
-                            await data.setLoaded(this.mediatype);
+            this.observer = new IntersectionObserver(
+                this.debounce(async (entries) => {
+                    if (entries[0].isIntersecting && !this.isFetching) {
+                        this.isFetching = true;
+                        try {
+                            if (this.searchQuery.length > 2) {
+                                await this.loadMoreResults();
+                            } else {
+                                await data.setLoaded(this.mediatype);
+                            }
+                        } finally {
+                            this.isFetching = false;
                         }
-                    } finally {
-                        this.isFetching = false;
                     }
-                }
-            }, { threshold: 0.1 });
+                }, 300), // Debounce delay of 300ms
+                { threshold: 0. }
+            );
 
             this.observer.observe(loadMoreTrigger);
         },
@@ -266,6 +278,9 @@ export default {
     },
     mounted() {
         this.setupObserver();
+        if (this.$route.hash) {
+            this.searchQuery = this.$route.hash.slice(1)
+        }
     },
     beforeDestroy() {
         this.cleanupObserver();

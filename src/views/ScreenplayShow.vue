@@ -1,14 +1,76 @@
+<template>
+    <section v-if="!loading" class="screenplayShow"
+        :style="{ '--bg-image': `url(${image + screenplay?.backdrop_path})` }">
+        <GoBack></GoBack>
+        <h1 class="mt-2">{{ screenplay?.original_title || screenplay?.original_name }} ({{ mediatype.toUpperCase() }})
+        </h1>
+        <div class="row m-4" style="margin-bottom: 200px;">
+            <div class="col-4">
+                <img v-if="screenplay?.poster_path" :src="image + screenplay.poster_path"
+                    :alt="screenplay?.title || screenplay?.name" class="mx-auto">
+            </div>
+            <div class="col-8" id="content">
+                <h2 class="text">{{ screenplay?.title || screenplay?.name }}
+                    ({{ $t('message.Language') }}: {{ screenplay?.original_language?.toUpperCase() }}, {{
+                        screenplay?.release_date || screenplay.first_air_date }})
+                </h2>
+
+                <h5 id="popularity" class="text">
+                    <span>- {{ $t('message.Popularity') }}: {{ screenplay?.popularity }}</span>
+                </h5>
+
+                <h5 class="text">{{ $t('message.Genre', screenplay?.genres?.length) }}:
+                    <span v-for="genre in screenplay?.genres" :key="genre.id">
+                        - {{ genre.name }}
+                    </span>
+                </h5>
+
+                <p class="text scrollable-bar-hidden">{{ screenplay?.overview }}</p>
+
+                <div v-if="screenplay?.vote_average">
+                    <span style="font-size: 20px; margin-right: 20px;">{{ $t('message.Rating') + ': ' +
+                        screenplay.vote_average.toFixed(2)
+                        }}</span>
+                    <StarRating :rating="screenplay.vote_average / 2" style="display: inline;" />
+                </div>
+
+                <div id="play">
+                    <AppLink :to="screenplay?.homepage">
+                        <img src="../../public/images/streaming.png" alt="play">
+                    </AppLink>
+                </div>
+            </div>
+        </div>
+
+        <!-- Loading State -->
+        <div v-if="loading" class="text-center py-5">
+            <SyncLoader />
+        </div>
+
+        <!-- Error State -->
+        <div v-if="error" class="alert alert-danger m-4">
+            {{ $t('message.Error_Loading') }}: {{ error }}
+        </div>
+
+        <!-- Review Component -->
+        <Review v-if="screenplay && !loading" :screenPlayId="screenPlayId"
+            :mediatype="mediatype === 'movie' ? 'movie' : 'tv'" />
+    </section>
+</template>
+
 <script>
 import GoBack from '@/components/GoBack.vue';
 import StarRating from '@/components/StarRating.vue';
 import data from '@/data';
 import SyncLoader from '@/components/SyncLoader.vue';
+import Review from '@/components/Review.vue';
 
 export default {
     components: {
         GoBack,
         StarRating,
-        SyncLoader
+        SyncLoader,
+        Review
     },
     props: {
         screenPlayId: { type: Number, required: true },
@@ -55,71 +117,17 @@ export default {
                 this.loading = false;
             }
         }
+    },
+    beforeRouteLeave(to, from) {
+        to.hash = from.hash
     }
 }
 </script>
 
-<template>
-    <section v-if="!loading" class="screenplayShow"
-        :style="{ '--bg-image': `url(${image + screenplay?.backdrop_path})` }">
-        <GoBack></GoBack>
-        <h1 class="mt-2">{{ screenplay?.original_title || screenplay?.original_name }} ({{ mediatype.toUpperCase() }})
-        </h1>
-        <div class="row m-4" style="margin-bottom: 200px;">
-            <div class="col-4">
-                <img v-if="screenplay?.poster_path" :src="image + screenplay.poster_path"
-                    :alt="screenplay?.title || screenplay?.name" class="mx-auto">
-            </div>
-            <div class="col-8" id="content">
-                <h2 class="text">{{ screenplay?.title || screenplay?.name }}
-                    ({{ $t('message.Language') }}: {{ screenplay?.original_language?.toUpperCase() }}, {{
-                        screenplay?.release_date || screenplay.first_air_date }})
-                </h2>
-
-                <h5 id="popularity" class="text">
-                    <span>- {{ $t('message.Popularity') }}: {{ screenplay?.popularity }}</span>
-                </h5>
-
-                <h5 class="text">{{ $t('message.Genre', screenplay?.genres?.length) }}:
-                    <span v-for="genre in screenplay?.genres" :key="genre.id">
-                        - {{ genre.name }}
-                    </span>
-                </h5>
-
-                <p class="text scrollable-bar-hidden">{{ screenplay?.overview }}</p>
-
-                <div v-if="screenplay?.vote_average">
-                    <span style="font-size: 20px; margin-right: 20px;">{{ $t('message.Rating') + ': ' +
-                        screenplay.vote_average.toFixed(2)
-                    }}</span>
-                    <StarRating :rating="screenplay.vote_average / 2" style="display: inline;" />
-                </div>
-
-                <div id="play">
-                    <AppLink :to="screenplay?.homepage">
-                        <img src="../../public/images/streaming.png" alt="play">
-                    </AppLink>
-                </div>
-            </div>
-        </div>
-        <!-- Loading State -->
-        <div v-if="loading" class="text-center py-5">
-            <SyncLoader />
-        </div>
-
-        <!-- Error State -->
-        <div v-if="error" class="alert alert-danger m-4">
-            {{ $t('message.Error_Loading') }}: {{ error }}
-        </div>
-    </section>
-
-
-</template>
-
 <style scoped>
 .screenplayShow {
     padding: 8vh;
-    height: 100vh;
+    min-height: 100vh;
     color: aliceblue;
 }
 

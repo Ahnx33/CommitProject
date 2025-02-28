@@ -107,24 +107,25 @@ const getListOfType = (type) => {
 const setLoaded = async (typeName) => {
 
     if (typeName === 'all') {
+        state.LoadedFilms++;
+        state.LoadedTvs++;
         await Promise.all([
             fetchMoreData(`${baseURL}/trending/movie/week`, state.LoadedFilms, state.filmsCatalog),
             fetchMoreData(`${baseURL}/trending/tv/week`, state.LoadedTvs, state.tvSeriesCatalog)
         ]);
-        state.LoadedFilms++;
-        state.LoadedTvs++;
+
     }
     if (typeName === 'film') {
-        fetchMoreData(`${baseURL}/trending/movie/week`, state.LoadedFilms, state.filmsCatalog);
         state.LoadedFilms++;
+        fetchMoreData(`${baseURL}/trending/movie/week`, state.LoadedFilms, state.filmsCatalog);
         console.log('pages: ' + state.LoadedFilms);
         console.log('hello');
 
         return;
     }
     if (typeName === 'tv') {
-        fetchMoreData(`${baseURL}/trending/tv/week`, state.LoadedTvs, state.tvSeriesCatalog);
         state.LoadedTvs++;
+        fetchMoreData(`${baseURL}/trending/tv/week`, state.LoadedTvs, state.tvSeriesCatalog);
     }
 };
 

@@ -123,10 +123,19 @@ export default {
 
 }
 
-
 /* Page content */
 .content {
     margin-left: 250px;
     position: relative;
+}
+
+@media only screen and (max-width: 768px) {
+    .sidebar {
+        display: none;
+    }
+
+    .content {
+        margin: 0;
+    }
 }
 </style>

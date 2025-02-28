@@ -12,7 +12,7 @@
                 v-if="screenplay.backdrop_path" @mouseenter="triggerEvent" @mouseleave="endEvent">
             <div class="skeleton skeleton-image" v-else></div>
 
-            <span>{{ screenplay.title || screenplay.name }}</span>
+            <span id='title'>{{ screenplay.title || screenplay.name }}</span>
             <div class="card_text">
                 <p>{{ (screenplay.overview).slice(0, 150) + '...' }}</p>
                 <div class="row">
@@ -73,7 +73,7 @@ export default {
 <style scoped>
 .card {
     transition: 0.5s;
-    margin: 1rem;
+    margin: 1vw;
     padding: 0.2rem;
     background-color: #79baf391;
     color: aliceblue;
@@ -116,6 +116,14 @@ export default {
 .overview:hover .card_text {
     display: block;
     box-shadow: 5px 4px 20px rgb(46, 44, 42);
+}
+
+#title {
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
 }
 
 /* Skeleton Loader Styles */

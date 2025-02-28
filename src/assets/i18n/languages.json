@@ -20,7 +20,16 @@
         "Sort_ReleaseDate": "Release Date",
         "Sort_Rating": "Rating",
         "No_Overview": "No Overview Available",
-        "Error_Loading": "Error_Loading"
+        "Post_Review": "Post a review!",
+        "Review": "Reviews",
+        "YourRating": "Your Rating",
+        "YourReview": "Your Review",
+        "WriteReviewPlaceholder": "Share your thoughts about this title...",
+        "SubmitReview": "Submit Review",
+        "ReviewSubmitted": "Your review has been submitted!",
+        "EditReview": "Edit Your Review",
+        "OtherReviews": "Community Reviews",
+        "Error_Loading": "Error loading data"
     },
     "it": {
         "Films": "Film",
