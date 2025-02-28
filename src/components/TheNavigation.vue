@@ -33,7 +33,7 @@
                     </li>
                     <li class="nav-item">
                         <AppLink :to="{ name: 'media.show', params: { id: -1, genre: 'all', mediatype: 'tv' } }"
-                            class="nav-link" key="films">{{ $t('message.TV_Series') }}</AppLink>
+                            class="nav-link" key="tv">{{ $t('message.TV_Series') }}</AppLink>
                     </li>
                 </ul>
             </div>
@@ -57,8 +57,8 @@ export default {
         DropList,
         LangSwitch
     },
-    computed:{
-        AllGenres(){
+    computed: {
+        AllGenres() {
             return data.state.allGenres
         }
     }

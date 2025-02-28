@@ -6,7 +6,12 @@
         shadowScale: 1.1,
 
     }" :loop="true" :modules="modules" class="mySwiper" :style="{ '--width-': `${widthInVw}vw` }">
-        <swiper-slide v-for="screenplay in firstFour"><img :src="image + screenplay.poster_path" /></swiper-slide>
+        <swiper-slide v-for="screenplay in firstFour">
+            <AppLink
+                :to="{ name: 'screenplay.show', params: { screenPlayId: screenplay.id, mediatype: screenplay?.title ? 'movie' : 'tv' } }">
+                <img :src="image + screenplay.poster_path" />
+            </AppLink>
+        </swiper-slide>
     </swiper>
 </template>
 <script>
@@ -36,9 +41,9 @@ export default {
     computed: {
         firstFour() {
             return this.toDisplay.sort((a, b) => {
-                return a.popularity - b.popularity
+                return b.popularity - a.popularity
             }).slice(0, 4)
-        }
+        },
     },
     setup(props) {
         const image = ref(data.imagePath)
@@ -65,6 +70,10 @@ export default {
 .swiper-slide img {
     display: block;
     width: 100%;
+}
+
+.swiper-slide img:hover {
+    cursor: grab;
 }
 
 :deep(.swiper-cube-shadow::before) {

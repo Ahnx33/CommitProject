@@ -6,8 +6,10 @@
                 <div class="col-4">
                     <div class="swiper-container">
                         <div class="circle first-circle">
-                            <img src="https://image.tmdb.org/t/p/original/2g0iU9jt32nwHmjyTJDRvnpVEZ8.jpg"
-                                alt="Film/TV Image" class="circle-img" />
+                            <AppLink :to="{ name: 'media.show', params: { id: -1, genre: 'all', mediatype: 'film' } }">
+                                <img :src="data.imagePath + trending(data.state.initialScreenplays[0]).backdrop_path"
+                                    alt="Film/TV Image" class="circle-img" />
+                            </AppLink>
                             <span class="circle-text">{{ $t('message.Movies') }}</span>
                         </div>
                     </div>
@@ -25,8 +27,10 @@
                 <div class="col-4">
                     <div class="swiper-container">
                         <div class="circle last-circle">
-                            <img src="https://image.tmdb.org/t/p/original/2g0iU9jt32nwHmjyTJDRvnpVEZ8.jpg"
-                                alt="Catalog Image" class="circle-img" />
+                            <AppLink :to="{ name: 'media.show', params: { id: -1, genre: 'all', mediatype: 'tv' } }">
+                                <img :src="data.imagePath + trending(data.state.initialScreenplays[1]).backdrop_path"
+                                    alt="Catalog Image" class="circle-img" />
+                            </AppLink>
                             <span class="circle-text">{{ $t('message.TV_Series') }}</span>
                         </div>
                     </div>
@@ -43,6 +47,11 @@
 import FirstEnterSwiper from './FirstEnterSwiper.vue';
 import data from '@/data';
 
+const trending = list => {
+    return list.sort((a, b) => {
+        return b.popularity - a.popularity
+    })[4]
+}
 </script>
 
 <style scoped>
