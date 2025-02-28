@@ -182,6 +182,7 @@ const hasReachedMaxPages = (type) => {
 
 export default {
     baseURL,
+    API_Key,
     getLangUrl,
     state,
     imagePath,
