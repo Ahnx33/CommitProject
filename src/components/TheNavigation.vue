@@ -57,9 +57,9 @@ export default {
         DropList,
         LangSwitch
     },
-    data() {
-        return {
-            AllGenres: data.state.allGenres,
+    computed:{
+        AllGenres(){
+            return data.state.allGenres
         }
     }
 

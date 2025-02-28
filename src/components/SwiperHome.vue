@@ -7,7 +7,7 @@
             <!-- Slides -->
             <div v-for="screenplay in genre" class="swiper-slide">
                 <img :src="image + screenplay.backdrop_path" :alt="screenplay.title || screenplay.name"
-                    @dblclick="navigateToDetail(screenplay.id)">
+                    @dblclick="navigateToDetail(screenplay)">
                 <span class="name_type">{{ screenplay.title || screenplay.name }}</span>
                 <!-- screenplay.media_type.toUpperCase() + ... when hover -->
             </div>
@@ -84,8 +84,8 @@ export default {
         }
     },
     methods: {
-        navigateToDetail(id) {
-            this.$router.push({ name: 'screenplay.show', params: { screenPlayId: id } });
+        navigateToDetail(screenplay) {
+            this.$router.push({ screenPlayId: screenplay.id, mediatype: screenplay?.title ? 'movie' : 'tv' });
         }
     }
 }
