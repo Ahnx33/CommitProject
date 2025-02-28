@@ -91,6 +91,8 @@ const init = async () => {
     console.log(state.filmGenresList, state.tvGenresList);
 };
 
+await init();
+
 const getListOfType = (type) => {
     if (type === 'film') return state.filmsCatalog;
     if (type === 'tv') return state.tvSeriesCatalog;
