@@ -62,6 +62,7 @@ const handleScroll = () => {
 
 // Lifecycle Hooks
 onMounted(() => {
+    data.init()
     nextTick(() => {
         let navbar = document.querySelector(".navbar");
         navbar?.classList.add('fixed-top');

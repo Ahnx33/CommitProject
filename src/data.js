@@ -91,8 +91,6 @@ const init = async () => {
     console.log(state.filmGenresList, state.tvGenresList);
 };
 
-init();
-
 const getListOfType = (type) => {
     if (type === 'film') return state.filmsCatalog;
     if (type === 'tv') return state.tvSeriesCatalog;
@@ -190,5 +188,6 @@ export default {
     reload_language,
     gethSearchPages,
     getSearchResults,
-    hasReachedMaxPages
+    hasReachedMaxPages,
+    init
 };
