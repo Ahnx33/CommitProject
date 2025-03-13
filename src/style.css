@@ -14,13 +14,14 @@ a {
 }
 
 body {
-  margin: 0;
-  color: #1E88E5;
-  background-color: rgb(33, 38, 53);
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
-  transition: 0.5s;
+    margin: 0;
+    color: #1E88E5;
+    color-scheme: dark;
+    background-color: rgb(33, 38, 53) !important;
+    place-items: center;
+    min-width: 320px;
+    min-height: 100vh;
+    transition: 0.5s;
 }
 
 h1 {
