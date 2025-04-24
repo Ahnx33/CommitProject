@@ -1,7 +1,44 @@
-# StreamHive
+# 🎬 StreamHive
 
-## Streaming web app project
-**`Live Demo:`** [Visit the Site!](https://streamhive01.netlify.app/) 
-**`API:`** [The Movie Database](https://www.themoviedb.org/)
+## 🌐 Streaming Web App Project
 
-### vite-vue3 js demo, a streaming web app based on the api tmdb
+**Live Demo:** [👉 Try it Out!](https://streamhive01.netlify.app/)  
+**API Powered by:** [🎥 The Movie Database (TMDB)](https://www.themoviedb.org/)
+
+---
+
+### 🚀 Project Overview
+
+**StreamHive** is a sleek and responsive streaming web app built with **Vite** and **Vue 3**, showcasing real-time movie data fetched from the **TMDB API**.
+
+It serves as a demonstration of modern frontend development practices with a clean UI, smooth navigation, and dynamic content loading.
+
+---
+
+### 🛠️ Tech Stack
+
+- **Frontend:** Vue 3 + Vite
+- **API Integration:** TMDB REST API
+- **Deployment:** Netlify
+
+---
+
+### 💡 Features
+
+- Browse trending movies and TV shows
+- Search functionality with real-time results
+- Detailed movie pages with metadata and visuals
+- Responsive design for all devices
+
+---
+
+### 📦 Future Enhancements
+
+- User authentication & personalized watchlists
+- Genre filtering and sorting
+- Infinite scrolling and improved loading states
+- Backend integration for favorites and comments
+
+---
+
+Feel free to fork the repo or check out the live version!
