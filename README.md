@@ -9,7 +9,7 @@
 
 ### 🚀 Project Overview
 
-**StreamHive** is a sleek and responsive streaming web app built with **Vite** and **Vue 3**, showcasing real-time movie data fetched from the **TMDB API**.
+**StreamHive** is a streaming web app built with **Vite** and **Vue 3**, showcasing real-time movie data fetched from the **TMDB API**.
 
 It serves as a demonstration of modern frontend development practices with a clean UI, smooth navigation, and dynamic content loading.
 
@@ -28,15 +28,16 @@ It serves as a demonstration of modern frontend development practices with a cle
 - Browse trending movies and TV shows
 - Search functionality with real-time results
 - Detailed movie pages with metadata and visuals
-- Responsive design for all devices
+- Genre filtering and sorting
+- Infinite scrolling and 
 
 ---
 
 ### 📦 Future Enhancements
 
 - User authentication & personalized watchlists
-- Genre filtering and sorting
-- Infinite scrolling and improved loading states
+- Improved loading states
+- Responsive design for all devices
 - Backend integration for favorites and comments
 
 ---
