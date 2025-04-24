@@ -2,8 +2,8 @@
 
 ## 🌐 Streaming Web App Project
 
-**Live Demo:** [👉 Try it Out!](https://streamhive01.netlify.app/)  
-**API Powered by:** [🎥 The Movie Database (TMDB)](https://www.themoviedb.org/)
+**Live Demo:** 👉 [Try it Out!](https://streamhive01.netlify.app/)  
+**API Powered by:** 🎥 [The Movie Database (TMDB)](https://www.themoviedb.org/)
 
 ---
 
